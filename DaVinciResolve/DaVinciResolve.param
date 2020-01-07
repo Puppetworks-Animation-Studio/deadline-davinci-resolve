@@ -1,0 +1,33 @@
+[About]
+Type=label
+Label=About
+Category=About Plugin
+CategoryOrder=-1
+Index=0
+Default=DaVinci Resolve plugin for Deadline
+Description=Not configurable
+
+[ConcurrentTasks]
+Type=label
+Label=ConcurrentTasks
+Category=About Plugin
+CategoryOrder=-1
+Index=0
+Default=True
+Description=Not configurable
+
+[ResolveExecutable]
+Type=multilinemultifilename
+Label=Resolve Executable
+Category=Render Executables
+CategoryOrder=0
+Default=C:\Program Files\Blackmagic Design\DaVinci Resolve\Resolve.exe
+Description=The path to the Resolve executable file. Enter alternative paths on separate lines.
+
+[FuScriptExecutable]
+Type=multilinemultifilename
+Label=FuScript Executable
+Category=Render Executables
+CategoryOrder=0
+Default=C:\Program Files\Blackmagic Design\DaVinci Resolve\fuscript.exe
+Description=The path to the Fuscript executable file. Enter alternative paths on separate lines.

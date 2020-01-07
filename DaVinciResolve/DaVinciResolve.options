@@ -1,0 +1,39 @@
+[Folders]
+Type=string
+Label=Folders
+Category=Project
+Description=Folders in which the project is, separated by "/"
+Index=0
+Required=false
+DisableIfBlank=false
+DefaultValue=
+
+[ProjectName]
+Type=string
+Label=Project Name
+Category=Project
+Index=1
+Description=The name of the project to open
+Required=true
+DisableIfBlank=false
+DefaultValue=
+
+[Timeline]
+Type=string
+Label=Timeline Name
+Category=Project
+Index=2
+Description=The name of the timeline to render
+Required=false
+DisableIfBlank=false
+DefaultValue=
+
+[OutputPath]
+Type=FilenameSave
+Label=Output Path
+Category=Output
+Description=Where to save the output
+Index=0
+Required=true
+DisableIfBlank=false
+DefaultValue=
