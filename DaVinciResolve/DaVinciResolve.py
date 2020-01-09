@@ -4,7 +4,6 @@ from Deadline.Plugins import *
 from Deadline.Scripting import *
 from System.IO import *
 
-STARTUP_WAITING_TIME = 10
 RESOLVE_PROCESS_NAME = "DaVinci Resolve Process"
 FUSCRIPT_PROCESS_NAME = "FuScript Process"
 
@@ -41,15 +40,16 @@ class DaVinciResolvePlugin(DeadlinePlugin):
         process = ResolveProcess(self)
         self.StartMonitoredManagedProcess(RESOLVE_PROCESS_NAME, process)
         self.SetStatusMessage("Waiting to start")
-        time.sleep(STARTUP_WAITING_TIME)  # TODO ProcessUtils.WaitForProcessToStart
 
     def RenderTasks(self):
         fuscript_process = FuScriptProcess(self)
         self.StartMonitoredManagedProcess(FUSCRIPT_PROCESS_NAME, fuscript_process)
         self.SetMonitoredManagedProcessExitCheckingFlag(FUSCRIPT_PROCESS_NAME, True)
+        self.FlushMonitoredManagedProcessStdout(RESOLVE_PROCESS_NAME)
 
         while not self.WaitForMonitoredManagedProcessToExit(FUSCRIPT_PROCESS_NAME, 1000):
             self.FlushMonitoredManagedProcessStdout(FUSCRIPT_PROCESS_NAME)
+            self.FlushMonitoredManagedProcessStdout(RESOLVE_PROCESS_NAME)
 
             # blockingDialogMessage = self.CheckForMonitoredManagedProcessPopups(RESOLVE_PROCESS_NAME)
             # if (blockingDialogMessage != ""):

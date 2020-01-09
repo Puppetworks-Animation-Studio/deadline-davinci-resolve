@@ -56,6 +56,8 @@ def _connect_to_resolve():
         i += 1
     if resolve is None:
         raise RuntimeError("Could not connect to DaVinci Resolve. There may be a problem starting it, or you may be using the free version.")
+    print "wait a bit more for resolve to become responsible"
+    time.sleep(5)
     return resolve
 
 
