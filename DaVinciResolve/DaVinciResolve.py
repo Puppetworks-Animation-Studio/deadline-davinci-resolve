@@ -120,8 +120,8 @@ class FuScriptProcess(ManagedProcess):
         self.SetEnvironmentVariable("PYTHONUNBUFFERED", "1")
 
         self.StdoutHandling = True
-        self.AddStdoutHandlerCallback(".*'CompletionPercentage': (\d*)\.").HandleCallback += self.HandleProgress
-        self.AddStdoutHandlerCallback(".*'Error': '.+'").HandleCallback += self.HandleJobError
+        self.AddStdoutHandlerCallback(".*'CompletionPercentage': (\d*)\..*'JobStatus': 'Rendering'").HandleCallback += self.HandleProgress
+        self.AddStdoutHandlerCallback(".*'JobStatus': 'Failed', 'Error': '(.+)'").HandleCallback += self.HandleJobError
         self.AddStdoutHandlerCallback("Traceback").HandleCallback += self.HandleTraceback
 
     def Cleanup(self):
