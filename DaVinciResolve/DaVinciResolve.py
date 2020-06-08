@@ -86,12 +86,13 @@ class ResolveProcess(ManagedProcess):
         self.RenderArgumentCallback += self.RenderArgument
 
         self.PopupHandling = True
-        # self.HandleQtPopups = True
+        self.HandleQtPopups = True
+        self.PopupMaxChildWindows = 50
         # self.HandleWindows10Popups = True
 
-        # self.SetEnvironmentVariable("QT_USE_NATIVE_WINDOWS", "1")
-        # self.PopupButtonClasses = ("Qt5QWindowIcon",)
-        # self.AddPopupHandler(".*", "[X]")
+        self.SetEnvironmentVariable("QT_USE_NATIVE_WINDOWS", "1")
+        self.PopupButtonClasses = ("Qt5QWindowIcon",)
+        self.AddPopupHandler(".*", "QPushButtonClassWindow")
         # self.AddPopupIgnorer(".*")
 
     def Cleanup(self):
@@ -106,8 +107,8 @@ class ResolveProcess(ManagedProcess):
         return self.deadline_plugin.GetConfigEntry("ResolveExecutable")
 
     def RenderArgument(self):
-        return "-nogui"
-        # return ""
+        # return "-nogui"
+        return ""
 
 
 class FuScriptProcess(ManagedProcess):
