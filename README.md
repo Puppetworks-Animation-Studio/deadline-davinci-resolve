@@ -28,3 +28,19 @@ Can contain path separators (/ or \\), to open multiple subfolders. Example: `fo
 * `Timeline` (optional): Name of the timeline to set as current.
 * `OutputPath`: File path to render to. This path is put through a `datetime.now().strftime()` so it can contain any [formatting tag](https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior).
 Example: `c:/temp/output_%Y%m%d-%H%M.mov` results in `c:/temp/output_20200103-1539.mov`
+
+### Example submission
+job_info.txt file
+```
+Name=Test DaVinci job
+Frames=1
+Plugin=DaVinciResolve
+```
+plugin_info.txt file
+```
+OutputPath=c:/output/%y%m%d/auto_davinci_output_%Y%m%d-%H%M.mp4
+ProjectName=masterproject
+Folders=folder1
+Timeline=timeline1
+```
+command to run: `deadlinecommand.exe job_info.txt plugin_info.txt`
