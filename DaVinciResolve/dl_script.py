@@ -16,21 +16,18 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("project_name")
     parser.add_argument("output_path")
-    parser.add_argument("--folders")
-    parser.add_argument("--timeline")
+    parser.add_argument("--folders", default="")
+    parser.add_argument("--timeline", default="")
+    parser.add_argument("--format", default="")
+    parser.add_argument("--codec", default="")
     args = parser.parse_args()
 
     project_name = args.project_name
     output_path = args.output_path
-    if args.folders:
-        folders = args.folders
-    else:
-        folders = ""
-
-    if args.timeline:
-        timeline_name = args.timeline
-    else:
-        timeline_name = ""
+    folders = args.folders
+    timeline_name = args.timeline
+    format_ = args.format
+    codec = args.codec
 
     formatted_output_path = datetime.now().strftime(output_path)
 
@@ -40,7 +37,7 @@ def main():
     if timeline_name:
         _set_timeline(project, timeline_name)
 
-    _setup_render_job(project, formatted_output_path)
+    _setup_render_job(project, formatted_output_path, format_, codec)
     _start_render(project)
 
 
@@ -84,7 +81,7 @@ def _set_timeline(project, timeline_name):
             assert project.SetCurrentTimeline(timeline), "Cannot set timeline."
 
 
-def _setup_render_job(project, formatted_output_path):
+def _setup_render_job(project, formatted_output_path, format_="", codec=""):
     # render_jobs = project.GetRenderJobs()
     # pprint.pprint(render_jobs)
     # print "removing"
@@ -99,6 +96,10 @@ def _setup_render_job(project, formatted_output_path):
         "CustomName": os.path.basename(formatted_output_path)
     }
     assert project.SetRenderSettings(render_settings), "Cannot set render settings..."
+
+    if format_ and codec:
+        assert project.SetCurrentRenderFormatAndCodec(format_, codec), "Cannot set render format/codec."
+
     # print "adding"
     assert project.AddRenderJob(), "Cannot add render job..."
 

@@ -2,6 +2,7 @@
 Type=string
 Label=Folders
 Category=Project
+CategoryOrder=0
 Description=Folders in which the project is, separated by "/"
 Index=0
 Required=false
@@ -12,6 +13,7 @@ DefaultValue=
 Type=string
 Label=Project Name
 Category=Project
+CategoryOrder=0
 Index=1
 Description=The name of the project to open
 Required=true
@@ -22,6 +24,7 @@ DefaultValue=
 Type=string
 Label=Timeline Name
 Category=Project
+CategoryOrder=0
 Index=2
 Description=The name of the timeline to render
 Required=false
@@ -32,8 +35,31 @@ DefaultValue=
 Type=FilenameSave
 Label=Output Path
 Category=Output
+CategoryOrder=1
 Description=Where to save the output
 Index=0
 Required=true
+DisableIfBlank=false
+DefaultValue=
+
+[Format]
+Type=string
+Label=Format
+Category=Output
+CategoryOrder=1
+Description=What format to use when exporing video
+Index=1
+Required=false
+DisableIfBlank=false
+DefaultValue=
+
+[Codec]
+Type=string
+Label=Codec
+Category=Output
+CategoryOrder=1
+Description=What codec to use when exporting video
+Index=2
+Required=false
 DisableIfBlank=false
 DefaultValue=

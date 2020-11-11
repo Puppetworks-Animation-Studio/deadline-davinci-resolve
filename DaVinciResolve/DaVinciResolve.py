@@ -107,8 +107,7 @@ class ResolveProcess(ManagedProcess):
         return self.deadline_plugin.GetConfigEntry("ResolveExecutable")
 
     def RenderArgument(self):
-        # return "-nogui"
-        return ""
+        return "-nogui"
 
 
 class FuScriptProcess(ManagedProcess):
@@ -142,6 +141,8 @@ class FuScriptProcess(ManagedProcess):
         output_path = self.deadline_plugin.GetPluginInfoEntry("OutputPath")
         folders = self.deadline_plugin.GetPluginInfoEntryWithDefault("Folders", "")
         timeline = self.deadline_plugin.GetPluginInfoEntryWithDefault("Timeline", "")
+        format_ = self.deadline_plugin.GetPluginInfoEntryWithDefault("Format", "")
+        codec = self.deadline_plugin.GetPluginInfoEntryWithDefault("Codec", "")
 
         dl_script = Path.Combine(self.deadline_plugin.GetPluginDirectory(), "dl_script.py")
 
@@ -153,11 +154,18 @@ class FuScriptProcess(ManagedProcess):
         if timeline:
             args.append('--timeline "{}"'.format(timeline))
 
+        if format_:
+            args.append('--format "{}"'.format(format_))
+
+        if codec:
+            args.append('--codec "{}"'.format(codec))
+
         return " ".join(args)
 
     def HandleProgress(self):
         progress = int(self.GetRegexMatch(1))
         self.deadline_plugin.SetProgress(progress)
+        self.deadline_plugin.SetStatusMessage("Rendering")
 
     def HandleJobError(self):
         message = self.GetRegexMatch(1)
