@@ -20,6 +20,7 @@ def main():
     parser.add_argument("--timeline", default="")
     parser.add_argument("--format", default="")
     parser.add_argument("--codec", default="")
+    parser.add_argument("--render_preset", default="")
     args = parser.parse_args()
 
     project_name = args.project_name
@@ -28,6 +29,7 @@ def main():
     timeline_name = args.timeline
     format_ = args.format
     codec = args.codec
+    render_preset = args.render_preset
 
     formatted_output_path = datetime.now().strftime(output_path)
 
@@ -37,7 +39,7 @@ def main():
     if timeline_name:
         _set_timeline(project, timeline_name)
 
-    _setup_render_job(project, formatted_output_path, format_, codec)
+    _setup_render_job(project, formatted_output_path, format_, codec, render_preset)
     _start_render(project)
 
 
@@ -81,13 +83,12 @@ def _set_timeline(project, timeline_name):
             assert project.SetCurrentTimeline(timeline), "Cannot set timeline."
 
 
-def _setup_render_job(project, formatted_output_path, format_="", codec=""):
-    # render_jobs = project.GetRenderJobs()
-    # pprint.pprint(render_jobs)
-    # print "removing"
+def _setup_render_job(project, formatted_output_path, format_="", codec="", render_preset=""):
     assert project.DeleteAllRenderJobs(), "Cannot delete render jobs..."
-    # render_jobs = project.GetRenderJobs()
-    # pprint.pprint(render_jobs)
+
+    print "Loading render preset [{}]".format(render_preset)
+    assert project.LoadRenderPreset(render_preset), "Cannot set render_preset [{}]".format(render_preset)
+
     render_settings = {
         # "SelectAllFrames": ?,
         # "MarkIn": ?,
@@ -100,7 +101,6 @@ def _setup_render_job(project, formatted_output_path, format_="", codec=""):
     if format_ and codec:
         assert project.SetCurrentRenderFormatAndCodec(format_, codec), "Cannot set render format/codec."
 
-    # print "adding"
     assert project.AddRenderJob(), "Cannot add render job..."
 
 

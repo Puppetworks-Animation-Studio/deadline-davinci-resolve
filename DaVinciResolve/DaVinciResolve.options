@@ -63,3 +63,14 @@ Index=2
 Required=false
 DisableIfBlank=false
 DefaultValue=
+
+[RenderPreset]
+Type=string
+Label=Render Preset
+Category=Output
+CategoryOrder=1
+Description=What render preset to load before exporting
+Index=3
+Required=false
+DisableIfBlank=false
+DefaultValue=

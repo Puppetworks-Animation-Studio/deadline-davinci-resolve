@@ -143,6 +143,7 @@ class FuScriptProcess(ManagedProcess):
         timeline = self.deadline_plugin.GetPluginInfoEntryWithDefault("Timeline", "")
         format_ = self.deadline_plugin.GetPluginInfoEntryWithDefault("Format", "")
         codec = self.deadline_plugin.GetPluginInfoEntryWithDefault("Codec", "")
+        render_preset = self.deadline_plugin.GetPluginInfoEntryWithDefault("RenderPreset", "")
 
         dl_script = Path.Combine(self.deadline_plugin.GetPluginDirectory(), "dl_script.py")
 
@@ -159,6 +160,9 @@ class FuScriptProcess(ManagedProcess):
 
         if codec:
             args.append('--codec "{}"'.format(codec))
+
+        if render_preset:
+            args.append('--render_preset "{}"'.format(render_preset))
 
         return " ".join(args)
 
