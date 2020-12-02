@@ -28,6 +28,14 @@ Can contain path separators (/ or \\), to open multiple subfolders. Example: `fo
 * `Timeline` (optional): Name of the timeline to set as current.
 * `OutputPath`: File path to render to. This path is put through a `datetime.now().strftime()` so it can contain any [formatting tag](https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior).
 Example: `c:/temp/output_%Y%m%d-%H%M.mov` results in `c:/temp/output_20200103-1539.mov`
+* `RenderPreset`: (optional): Render preset to use when exporting the movie. If you are using a custom one, make sure to save it into the project file. Example: `YouTube - 1080p`
+* `Format`: (optional, but Format + Codec have to be both specified to be set) Format to be used when exporting. Example: `mp4`
+* `Codec`: (optional, but Format + Codec have to be both specified to be set) Codec to be used when exporting. Example: `h264` 
+
+##### Notes
+* The RenderPreset is loaded first, then the Format+Codec, so you can override these settings from the preset. 
+* If any of the optional parameters are not set, the values in the project file will be used.
+* If any of the pearameters cannot be set, the job will fail.
 
 ### Example submission
 job_info.txt file
