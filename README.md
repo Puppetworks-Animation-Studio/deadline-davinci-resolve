@@ -35,7 +35,7 @@ Example: `c:/temp/output_%Y%m%d-%H%M.mov` results in `c:/temp/output_20200103-15
 ##### Notes
 * The RenderPreset is loaded first, then the Format+Codec, so you can override these settings from the preset. 
 * If any of the optional parameters are not set, the values in the project file will be used.
-* If any of the pearameters cannot be set, the job will fail.
+* If any of the parameters cannot be set, the job will fail.
 
 ### Example submission
 job_info.txt file
